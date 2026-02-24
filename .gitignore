@@ -26,3 +26,8 @@ replay_pid*
 # Database config
 db.properties
 
+# Eclipse
+.project
+.classpath
+.settings/
+
