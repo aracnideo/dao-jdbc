@@ -1,6 +1,6 @@
 package application;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
@@ -13,9 +13,16 @@ public class Program {
 		
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-		System.out.println("---Test1: Find Seller By Id: 3---");
+		System.out.println("---Test1: Find Seller By Id---");
 		Seller seller = sellerDao.findById(3);
 		System.out.println(seller);
+		System.out.println();
+		System.out.println("---Test2: Find Seller By Department---");
+		Department department = new Department(2, null);
+		List<Seller> listSeller = sellerDao.findByDepartment(department);
+		for (Seller s: listSeller) {
+			System.out.println(s);
+		}
 
 	}
 
