@@ -14,20 +14,18 @@ import model.dao.DepartmentDao;
 import model.entities.Department;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
-	
+
 	Connection conn;
-	
+
 	public DepartmentDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
 
 	@Override
-	public void insert(Department department) {	
+	public void insert(Department department) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement(
-					"INSERT INTO department (Name) VALUES" + "(?)",
-					Statement.RETURN_GENERATED_KEYS);
+			st = conn.prepareStatement("INSERT INTO department (Name) VALUES" + "(?)", Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, department.getName());
 
 			int rowsAffected = st.executeUpdate();
@@ -52,8 +50,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 	public void update(Department department) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement(
-					"UPDATE department SET Name = ? WHERE Id = ?");
+			st = conn.prepareStatement("UPDATE department SET Name = ? WHERE Id = ?");
 			st.setString(1, department.getName());
 			st.setInt(2, department.getId());
 
@@ -67,6 +64,16 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
 	@Override
 	public void deleteById(Integer id) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM department WHERE Id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -110,7 +117,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 			DB.closeResultSet(rs);
 		}
 	}
-	
+
 	public Department instantiateDepartment(ResultSet rs) throws SQLException {
 		Department department = new Department();
 		department.setId(rs.getInt("Id"));
