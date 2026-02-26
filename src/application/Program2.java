@@ -7,7 +7,6 @@ import db.DB;
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class Program2 {
 	
@@ -32,6 +31,12 @@ public class Program2 {
 		Department newDepartment = new Department(null, "Steel");
 		departmentDao.insert(newDepartment);
 		System.out.println("new department inserted. New id: " + newDepartment.getId());
+		
+		System.out.println("---Test4: Department Update---");
+		department = departmentDao.findById(13);
+		department.setName("Rock");
+		departmentDao.update(department);
+		System.out.println("Department updated.");
 		
 		sc.close();
 		DB.closeConnection();
