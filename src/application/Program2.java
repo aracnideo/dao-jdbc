@@ -28,6 +28,11 @@ public class Program2 {
 			System.out.println(d);
 		}
 		
+		System.out.println("---Test3: Department Insert---");
+		Department newDepartment = new Department(null, "Steel");
+		departmentDao.insert(newDepartment);
+		System.out.println("new department inserted. New id: " + newDepartment.getId());
+		
 		sc.close();
 		DB.closeConnection();
 	}
