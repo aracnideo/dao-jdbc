@@ -30,10 +30,16 @@ public class Program {
 		for (Seller s: listSeller) {
 			System.out.println(s);
 		}
-		System.out.println("---Test4: Seller Insert---");
-		Seller newSeller = new Seller(null, "Braulio", "braulio@gmail.dale", LocalDate.of(1998, 4, 21), 3000.0, department);
-		sellerDao.insert(newSeller);
-		System.out.println("new seller inserted. New id: " + newSeller.getId());
+//		System.out.println("---Test4: Seller Insert---");
+//		Seller newSeller = new Seller(null, "Braulio", "braulio@gmail.dale", LocalDate.of(1998, 4, 21), 3000.0, department);
+//		sellerDao.insert(newSeller);
+//		System.out.println("new seller inserted. New id: " + newSeller.getId());
+		
+		System.out.println("---Test5: Seller Update---");
+		seller = sellerDao.findById(5);
+		seller.setName("Cassio");
+		sellerDao.update(seller);
+		System.out.println("Seller updated.");
 	}
 
 }
